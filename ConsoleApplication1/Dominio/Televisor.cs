@@ -17,6 +17,7 @@ namespace Dominio
         private int brillo;
         private int contraste;
         private int volumen;
+        private int canal;
         #endregion
 
         #region Properties
@@ -65,13 +66,17 @@ namespace Dominio
             get { return volumen; }
             set { volumen = value; }
         }
-
+        public int Canal
+        {
+            get { return canal; }
+            set { canal = value; }
+        }
 
 
         #endregion
 
-        #region Constructor
-        public Televisor(string marca, string modelo, EnumTipoPantalla tipoPantalla, bool smart, EnumEstado estado, int brillo, int contraste, int volumen)
+        #region Constructors
+        public Televisor(string marca, string modelo, EnumTipoPantalla tipoPantalla, bool smart, EnumEstado estado, int brillo, int contraste, int volumen, int canal)
         {
             this.marca = marca;
             this.modelo = modelo;
@@ -81,12 +86,37 @@ namespace Dominio
             this.brillo = brillo;
             this.contraste = contraste;
             this.volumen = volumen;
+            this.canal = canal;
         }
         #endregion
 
-        public override string ToString()
+        #region Métodos
+        public void SubirCanal()
         {
-            return string.Format("Marca: {0}\nModelo: {1}\nTipo de pantalla: {2}\nSmart: {3}\nEstado: {4}\nBrillo: {5}\nContraste: {6}\nVolumen: {7}", modelo, marca, tipoPantalla, smart, estado, brillo, contraste, volumen);          
+            canal++;
+            if (canal > 100)
+                canal = 1;
+            else if (canal < 1)
+                canal = 100;
         }
+        public void subirVolumen()
+        {
+            if (volumen <= 90)
+                volumen += 10;
+
+
+        }
+        public void BajarVolumen()
+        {
+            if (volumen >= 10)
+                volumen -= 10;
+
+
+        }
+        public override string ToString()
+        {            
+            return string.Format("Marca: {0}\nModelo: {1}\nTipo de pantalla: {2}\nSmart: {3}\nEstado: {4}\nBrillo: {5}\nContraste: {6}\nVolumen: {7}\nCanal: {8}", modelo, marca, tipoPantalla, smart, estado, brillo, contraste, volumen, canal);          
+        }
+        #endregion
     }
 }
